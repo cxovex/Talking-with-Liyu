@@ -6,10 +6,12 @@ html, body {
 }
 
 .app {
+  width: 100%;
+  max-width: 420px;
+  height: 100dvh;
+  background: #cdefff;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  background: #cdefff;
 }
 
 header {
