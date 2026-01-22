@@ -82,18 +82,18 @@ function selectChoice(text) {
   // 내 메시지
   const myMsg = document.createElement("div");
   myMsg.className = "message me";
-  myMsg.innerHTML = `<div class="bubble">${text}</div>`;
-  chat.appendChild(myMsg);
-  chat.scrollTop = chat.scrollHeight;
-
+  myMsg.innerHTML = `
+  <div class="bubble">${text}</div>
+  `;
+    chat.appendChild(myMsg)
+ 
   // 립우 답장
-  setTimeout(() => {
-    const reply = document.createElement("div");
-    reply.className = "message";
-    reply.innerHTML = `
-      <img class="profile" src="./profile.jpg">
-      <div class="bubble">${scenario[step].replies[text]}</div>
-    `;
+  const reply = document.createElement("div");
+  reply.className = "message riwoo";
+  reply.innerHTML = `
+  <img class="profile" src="./profile.jpg">
+  <div class="bubble">${scenario[step].replies[text]}</div>
+  `;
     chat.appendChild(reply);
     chat.scrollTop = chat.scrollHeight;
 
