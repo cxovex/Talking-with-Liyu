@@ -91,3 +91,36 @@ header {
   background: white;
   border-top: 1px solid #ddd;
 }
+
+.message {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  margin-bottom: 8px;
+  animation: pop 0.25s ease-out;
+}
+
+/* 립우 말 */
+.riwoo {
+  background: white;
+  align-self: flex-start;
+}
+
+/* 내가 보낸 말 */
+.me {
+  background: #4fc3f7;
+  color: white;
+  align-self: flex-end;
+}
+
+/* 톡 튀어나오는 애니메이션 */
+@keyframes pop {
+  from {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
