@@ -1,24 +1,30 @@
 <!DOCTYPE html>
- <html lang="ko">
- <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
- <title>Liyu</title>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Liyu</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
 
-  <body>
-<div class="app">
-  <header>Liyu</header>
+<body>
+  <div class="app">
+    <header>Liyu</header>
 
-  <div class="chat-area" id="chat">
-    <div class="message">
-      <img class="profile" src="./profile.jpg">
-      <div class="bubble">러부단~ 뭐해용?</div>
+    <!-- 채팅 영역 -->
+    <div class="chat-area" id="chat">
+      <!-- 첫 메시지 -->
+      <div class="message riwoo">
+        <img class="profile" src="./profile.jpg">
+        <div class="bubble">러부단~ 뭐해용?</div>
+      </div>
     </div>
-  </div>
 
-  <div class="choices" id="choices"></div>
-  <div class="input">메시지 보내기...</div>
-</div>
+    <!-- 선택지 -->
+    <div class="choices" id="choices"></div>
+
+    <div class="input">메시지 보내기...</div>
+  </div>
 
 <script>
 const chat = document.getElementById("chat");
@@ -26,7 +32,7 @@ const choices = document.getElementById("choices");
 
 let step = 0;
 
-/* ⭐⭐⭐ 여기만 수정하면 됨 ⭐⭐⭐ */
+/* 💙 여기만 내용 수정하면 됨 */
 const scenario = [
   {
     choices: [
@@ -49,19 +55,19 @@ const scenario = [
     replies: {
       "당연히 보고 싶지!": "저도요… 러부단 빨리 만나고싶어요",
       "웅 너무너무 ㅜㅜ": "저도에요 ㅋㅋ 나도 러부단 만나고 싶다아..",
-      "맨날 생각나": "헐 저돈데 통했네요 ㅋㅋ 빨리 러부단 만나고 싶어요.."
+      "맨날 생각나": "헐 저돈데요 ㅋㅋ 빨리 러부단 만나고 싶어요"
     }
   },
   {
     choices: [
       "우리 언제 만날까?",
       "립우가 먼저 찾아와줘야지 ㅜㅜ",
-      "우리 꿈에서 만날까?"
+      "우리 꿈에서 만날까? ㅋㅋ"
     ],
     replies: {
       "우리 언제 만날까?": "저도 그 생각 맨날 해요…",
       "립우가 먼저 찾아와줘야지 ㅜㅜ": "헉.. 제가 최대한 빨리 찾아올게요!",
-      "우리 꿈에서 만날까?": "그럼 오늘 꿈에 꼭 갈게요 약속!"
+      "우리 꿈에서 만날까? ㅋㅋ": "그럼 오늘 꿈에 꼭 갈게요 약속!"
     }
   }
 ];
@@ -79,21 +85,21 @@ function renderChoices() {
 function selectChoice(text) {
   choices.innerHTML = "";
 
-  // 내 메시지
+  /* 내가 보낸 말 */
   const myMsg = document.createElement("div");
   myMsg.className = "message me";
-  myMsg.innerHTML = `
-  <div class="bubble">${text}</div>
-  `;
-    chat.appendChild(myMsg)
- 
-  // 립우 답장
-  const reply = document.createElement("div");
-  reply.className = "message riwoo";
-  reply.innerHTML = `
-  <img class="profile" src="./profile.jpg">
-  <div class="bubble">${scenario[step].replies[text]}</div>
-  `;
+  myMsg.innerHTML = `<div class="bubble">${text}</div>`;
+  chat.appendChild(myMsg);
+  chat.scrollTop = chat.scrollHeight;
+
+  /* 립우 답장 */
+  setTimeout(() => {
+    const reply = document.createElement("div");
+    reply.className = "message riwoo";
+    reply.innerHTML = `
+      <img class="profile" src="./profile.jpg">
+      <div class="bubble">${scenario[step].replies[text]}</div>
+    `;
     chat.appendChild(reply);
     chat.scrollTop = chat.scrollHeight;
 
@@ -109,7 +115,7 @@ function selectChoice(text) {
 
 function showEnding() {
   const end = document.createElement("div");
-  end.className = "message";
+  end.className = "message riwoo";
   end.innerHTML = `
     <img class="profile" src="./profile.jpg">
     <div class="bubble">
@@ -122,6 +128,7 @@ function showEnding() {
   chat.scrollTop = chat.scrollHeight;
 }
 
+/* 시작 */
 renderChoices();
 </script>
 </body>
