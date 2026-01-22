@@ -1,136 +1,128 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Liyu</title>
-  <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-  <div class="app">
-    <header>Liyu</header>
+ <html lang="ko">
+ <head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+ <title>Liyu</title>
 
-    <!-- 🔥 id 추가 -->
-    <div class="chat-area" id="chat">
-      <div class="message riwoo">
-        <img class="profile" src="./profile.jpg">
-        <div class="bubble">러부단~ 뭐해용?</div>
-      </div>
+  <body>
+<div class="app">
+  <header>Liyu</header>
+
+  <div class="chat-area" id="chat">
+    <div class="message">
+      <img class="profile" src="./profile.jpg">
+      <div class="bubble">러부단~ 뭐해용?</div>
     </div>
-
-    <!-- 🔥 id + onclick 추가 -->
-    <div class="choices" id="choices">
-      <button onclick="selectChoice('나는 립우 생각~')">나는 립우 생각~</button>
-      <button onclick="selectChoice('립우 생각! 립우는 뭐해?')">립우 생각! 립우는 뭐해?</button>
-      <button onclick="selectChoice('립우랑 연락 중!')">립우랑 연락 중!</button>
-    </div>
-
-    <div class="input">메시지 보내기...</div>
   </div>
 
-  <!-- ✅ JS는 body 맨 아래 -->
-  <script>
-  const chat = document.getElementById("chat");
-  const choices = document.getElementById("choices");
+  <div class="choices" id="choices"></div>
+  <div class="input">메시지 보내기...</div>
+</div>
 
-  let step = 0;
+<script>
+const chat = document.getElementById("chat");
+const choices = document.getElementById("choices");
 
-  const scenario = [
-    {
-      choices: [
-        "나는 립우 생각~",
-        "립우는 뭐해?",
-        "지금 연락 중!"
-      ],
-      replies: {
-        "나는 립우 생각~": "오 ㅎㅎ 감동인데요? 러부단! 나 보고 싶어요?",
-        "립우는 뭐해?": "나는 러부단 생각하고 있죠~ 러부단 나 많이 보고 싶어요?",
-        "지금 연락 중!": "나도 러부단이랑 연락 중인데! 러부단 나 보고싶죠? ㅎㅎ"
-      }
-    },
-    {
-      choices: [
-        "당연히 보고 싶지!",
-        "웅 너무너무 ㅜㅜ",
-        "맨날 생각나"
-      ],
-      replies: {
-        "당연히 보고 싶지!": "저도요… 러부단 빨리 만나고싶어요",
-        "웅 너무너무 ㅜㅜ": "저도에요 ㅋㅋ 나도 러부단 만나고 싶다아..",
-        "맨날 생각나": "헐 저돈데 통했네요 ㅋㅋ 빨리 러부단 만나고 싶어요.."
-      }
-    },
-    {
-      choices: [
-        "우리 언제 만날까?",
-        "립우가 먼저 찾아와줘야 우리도 만날 수 있는데 ㅜㅜ",
-        "우리 꿈에서 만날까? ㅋㅋ"
-      ],
-      replies: {
-        "우리 언제 만날까?": "저도 그 생각 맨날 해요…",
-        "립우가 먼저 찾아와줘야 우리도 만날 수 있는데 ㅜㅜ": "헉.. 제가 최대한 빨리 찾아올게요!",
-        "우리 꿈에서 만날까? ㅋㅋ": "그럼 오늘 꿈에 꼭 갈게요 약속!"
-      }
+let step = 0;
+
+/* ⭐⭐⭐ 여기만 수정하면 됨 ⭐⭐⭐ */
+const scenario = [
+  {
+    choices: [
+      "나는 립우 생각~",
+      "립우는 뭐해?",
+      "지금 연락 중!"
+    ],
+    replies: {
+      "나는 립우 생각~": "오 ㅎㅎ 감동인데요? 러부단! 나 보고 싶어요?",
+      "립우는 뭐해?": "나는 러부단 생각하고 있죠~ 러부단 나 많이 보고 싶어요?",
+      "지금 연락 중!": "나도 러부단이랑 연락 중인데! 러부단 나 보고싶죠? ㅎㅎ"
     }
-  ];
-
-  function renderChoices() {
-    choices.innerHTML = "";
-    scenario[step].choices.forEach(text => {
-      const btn = document.createElement("button");
-      btn.innerText = text;
-      btn.onclick = () => selectChoice(text);
-      choices.appendChild(btn);
-    });
+  },
+  {
+    choices: [
+      "당연히 보고 싶지!",
+      "웅 너무너무 ㅜㅜ",
+      "맨날 생각나"
+    ],
+    replies: {
+      "당연히 보고 싶지!": "저도요… 러부단 빨리 만나고싶어요",
+      "웅 너무너무 ㅜㅜ": "저도에요 ㅋㅋ 나도 러부단 만나고 싶다아..",
+      "맨날 생각나": "헐 저돈데 통했네요 ㅋㅋ 빨리 러부단 만나고 싶어요.."
+    }
+  },
+  {
+    choices: [
+      "우리 언제 만날까?",
+      "립우가 먼저 찾아와줘야지 ㅜㅜ",
+      "우리 꿈에서 만날까?"
+    ],
+    replies: {
+      "우리 언제 만날까?": "저도 그 생각 맨날 해요…",
+      "립우가 먼저 찾아와줘야지 ㅜㅜ": "헉.. 제가 최대한 빨리 찾아올게요!",
+      "우리 꿈에서 만날까?": "그럼 오늘 꿈에 꼭 갈게요 약속!"
+    }
   }
+];
+
+function renderChoices() {
+  choices.innerHTML = "";
+  scenario[step].choices.forEach(text => {
+    const btn = document.createElement("button");
+    btn.innerText = text;
+    btn.onclick = () => selectChoice(text);
+    choices.appendChild(btn);
+  });
+}
 
 function selectChoice(text) {
   choices.innerHTML = "";
 
-  // 내가 보낸 말
+  // 내 메시지
   const myMsg = document.createElement("div");
   myMsg.className = "message me";
-  myMsg.innerText = text;
+  myMsg.innerHTML = `<div class="bubble">${text}</div>`;
   chat.appendChild(myMsg);
   chat.scrollTop = chat.scrollHeight;
 
   // 립우 답장
-  setTimeout(() => {    
+  setTimeout(() => {
     const reply = document.createElement("div");
-    reply.className = "message riwoo";
-    reply.innerText = scenario[step].replies[text];
+    reply.className = "message";
+    reply.innerHTML = `
+      <img class="profile" src="./profile.jpg">
+      <div class="bubble">${scenario[step].replies[text]}</div>
+    `;
     chat.appendChild(reply);
     chat.scrollTop = chat.scrollHeight;
 
     step++;
 
-    // 🔚 엔딩
     if (step < scenario.length) {
-      setTimeout(() => {
-        renderChoices();
-      }, 500);
+      setTimeout(renderChoices, 500);
+    } else {
+      setTimeout(showEnding, 800);
     }
   }, 700);
 }
 
-  function showEnding() {
-    const endMsg = document.createElement("div");
-    endMsg.className = "message riwoo";
-    endMsg.innerHTML = `
-      <img class="profile" src="./profile.jpg">
-      <div class="bubble">
-        나도 얼른 러부단 만나고 싶어요ㅜ<br>
-        우리 곧 다시 만나요!<br>
-        사랑해요 ♥
-      </div>
-    `;
-    chat.appendChild(endMsg);
-    chat.scrollTop = chat.scrollHeight;
-  }
+function showEnding() {
+  const end = document.createElement("div");
+  end.className = "message";
+  end.innerHTML = `
+    <img class="profile" src="./profile.jpg">
+    <div class="bubble">
+      나도 얼른 러부단 만나고 싶어요ㅜ<br>
+      우리 곧 다시 만나요!<br>
+      사랑해요 ♥
+    </div>
+  `;
+  chat.appendChild(end);
+  chat.scrollTop = chat.scrollHeight;
+}
 
-  // 처음 선택지 표시
-  renderChoices();
+renderChoices();
 </script>
-
 </body>
 </html>
